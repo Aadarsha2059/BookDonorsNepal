@@ -3,6 +3,7 @@ document.getElementById('drop-suggestion').addEventListener('click', function() 
     if (suggestion.trim()) {
         alert('Suggestion submitted: ' + suggestion);
         document.getElementById('suggestion-form').reset();
+        window.location.href = 'index.html'; // Navigate back to index.html
     } else {
         alert('Please enter a suggestion.');
     }
