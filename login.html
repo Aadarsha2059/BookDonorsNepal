@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login </title>
+    <title>Login</title>
     <link rel="stylesheet" href="loginstyle.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
@@ -16,11 +16,17 @@
         <input type="email" placeholder="" />
         <label>Password</label>
         <input type="password" placeholder="" />
-        <input type="button" value="Submit" />
+        <input type="button" value="Submit" onclick="login()" />
       </form>
       <p class="para-2">
         Don't have an account? <a href="signupindex.html">Sign Up as Donor</a>
       </p>
     </div>
+    <script>
+      function login() {
+        
+        window.location.href = "donorspage.html";
+      }
+    </script>
   </body>
 </html>

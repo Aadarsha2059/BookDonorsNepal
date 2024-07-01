@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate My Book - Book Donors Nepal</title>
+    <link rel="stylesheet" href="donorspage.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Donate My Book</h1>
+        <form id="donateForm">
+            <label for="bookImage">Book Image:</label>
+            <input type="file" id="bookImage" name="bookImage" accept="image/*" required>
+            
+            <label for="bookGenre">Genre:</label>
+            <select id="bookGenre" name="bookGenre" required>
+                <option value="">Select Genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Science">Science</option>
+                <option value="History">History</option>
+                <option value="Biography">Biography</option>
+                <!-- Add more genres as needed -->
+            </select>
+            
+            <label for="bookName">Book Name:</label>
+            <input type="text" id="bookName" name="bookName" required>
+            
+            <button type="button" onclick="donateBook()">Donate Here</button>
+        </form>
+        
+        <h2>Donated Books</h2>
+        <table id="donatedBooksTable">
+            <thead>
+                <tr>
+                    <th>Book Image</th>
+                    <th>Genre</th>
+                    <th>Book Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Donated books will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="donorspage.js"></script>
+</body>
+</html>
