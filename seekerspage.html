@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Available Now - Book Seekers Nepal</title>
+    <link rel="stylesheet" href="seekerspage.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Books Available Now</h1>
+        <table id="availableBooksTable">
+            <thead>
+                <tr>
+                    <th>Book Image</th>
+                    <th>Genre</th>
+                    <th>Book Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+      window.onload = function() {
+          const books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
+          const table = document.getElementById('availableBooksTable').getElementsByTagName('tbody')[0];
+
+          books.forEach(book => {
+              const newRow = table.insertRow();
+
+              const cell1 = newRow.insertCell(0);
+              const cell2 = newRow.insertCell(1);
+              const cell3 = newRow.insertCell(2);
+
+              cell1.innerHTML = `<img src="${book.bookImage}" alt="Book Image" width="100">`;
+              cell2.innerHTML = book.bookGenre;
+              cell3.innerHTML = book.bookName;
+          });
+      };
+    </script>
+</body>
+</html>

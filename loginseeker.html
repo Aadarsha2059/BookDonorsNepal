@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Login Seeker</title>
-    <link rel="stylesheet" href="loginstyle.css" />
+    <link rel="stylesheet" href="loginseeker.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
@@ -11,16 +11,31 @@
   <body>
     <div class="login-box">
       <h1>Login Seeker</h1>
-      <form>
+      <form id="loginForm">
         <label>Email</label>
-        <input type="email" placeholder="" />
+        <input type="email" id="email" placeholder="" />
         <label>Password</label>
-        <input type="password" placeholder="" />
-        <input type="button" value="Submit" />
+        <input type="password" id="password" placeholder="" />
+        <input type="button" value="Submit" id="submitBtn" />
       </form>
       <p class="para-2">
         Don't have an account? <a href="signupseeker.html">Sign Up as Seeker</a>
       </p>
     </div>
+    <script>
+      document.getElementById('submitBtn').addEventListener('click', function() {
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        
+        if (email && password) {
+          
+          window.location.href = 'seekerspage.html';
+        } else {
+          alert('Please enter both email and password.');
+        }
+      });
+    </script>
   </body>
 </html>

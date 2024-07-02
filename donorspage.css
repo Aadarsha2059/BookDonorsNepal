@@ -1,3 +1,5 @@
+/* donorspage.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,12 +9,12 @@ body {
 
 .container {
     width: 80%;
-    margin: auto;
-    overflow: hidden;
+    margin: 0 auto;
     padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    border-radius: 8px;
 }
 
 h1, h2 {
@@ -23,51 +25,86 @@ h1, h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 label {
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #555;
 }
 
 input[type="file"],
-input[type="text"],
-select {
+select,
+input[type="text"] {
     padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 button {
-    padding: 10px;
-    font-size: 1em;
-    background: #5cb85c;
-    color: white;
+    padding: 12px;
+    background-color: #28a745;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background: #4cae4c;
+    background-color: #218838;
 }
 
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: center;
+    vertical-align: middle;
 }
 
-th {
-    background: #f2f2f2;
+table th {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+img {
+    max-width: 100px;
+    border-radius: 4px;
+}
+
+button {
+    margin: 5px;
+}
+
+button.edit {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+button.edit:hover {
+    background-color: #e0a800;
+}
+
+button.delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button.delete:hover {
+    background-color: #c82333;
 }

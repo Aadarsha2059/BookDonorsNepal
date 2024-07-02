@@ -1,31 +1,50 @@
 function donateBook() {
-    const bookImageInput = document.getElementById('bookImage');
+    const bookImage = document.getElementById('bookImage').files[0];
     const bookGenre = document.getElementById('bookGenre').value;
     const bookName = document.getElementById('bookName').value;
 
-    if (bookImageInput.files.length === 0 || !bookGenre || !bookName) {
-        alert("Please fill all the fields");
+    if (!bookImage || !bookGenre || !bookName) {
+        alert('Please fill in all fields.');
         return;
     }
 
     const reader = new FileReader();
-    reader.onload = function(e) {
-        const bookImage = e.target.result;
+    reader.onload = function(event) {
+        const bookImageUrl = event.target.result;
+        const bookData = {
+            bookImage: bookImageUrl,
+            bookGenre: bookGenre,
+            bookName: bookName
+        };
 
-        const table = document.getElementById('donatedBooksTable').getElementsByTagName('tbody')[0];
-        const newRow = table.insertRow();
+        // Get current books from localStorage
+        let books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
+        books.push(bookData);
 
-        const cell1 = newRow.insertCell(0);
-        const cell2 = newRow.insertCell(1);
-        const cell3 = newRow.insertCell(2);
+        // Store updated books back to localStorage
+        localStorage.setItem('donatedBooks', JSON.stringify(books));
 
-        cell1.innerHTML = `<img src="${bookImage}" alt="Book Image" width="100">`;
-        cell2.textContent = bookGenre;
-        cell3.textContent = bookName;
-
-        // Clear the form
-        document.getElementById('donateForm').reset();
+        // Add book to table
+        addBookToTable(bookData);
     };
-    
-    reader.readAsDataURL(bookImageInput.files[0]);
+    reader.readAsDataURL(bookImage);
 }
+
+function addBookToTable(book) {
+    const table = document.getElementById('donatedBooksTable').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const cell1 = newRow.insertCell(0);
+    const cell2 = newRow.insertCell(1);
+    const cell3 = newRow.insertCell(2);
+
+    cell1.innerHTML = `<img src="${book.bookImage}" alt="Book Image" width="100">`;
+    cell2.innerHTML = book.bookGenre;
+    cell3.innerHTML = book.bookName;
+}
+
+// Load donated books on page load
+window.onload = function() {
+    const books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
+    books.forEach(book => addBookToTable(book));
+};
