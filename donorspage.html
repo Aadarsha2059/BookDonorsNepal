@@ -10,8 +10,8 @@
     <div class="container">
         <h1>Donate My Book</h1>
         <form id="donateForm">
-            <label for="bookImage">Book Image:</label>
-            <input type="file" id="bookImage" name="bookImage" accept="image/*" required>
+            <label for="bookImage">Book Image / File:</label>
+            <input type="file" id="bookImage" name="bookImage" accept=".png, .pdf, .doc, .docx" required>
             
             <label for="bookGenre">Genre:</label>
             <select id="bookGenre" name="bookGenre" required>
@@ -37,7 +37,7 @@
             <thead>
                 <tr>
                     <th>Book ID</th>
-                    <th>Book Image</th>
+                    <th>Book Image / File</th>
                     <th>Genre</th>
                     <th>Book Name</th>
                     <th>Actions</th>
@@ -62,23 +62,29 @@
 
             const reader = new FileReader();
             reader.onload = function(event) {
-                const bookImageUrl = event.target.result;
-                const books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
-                const bookId = books.length > 0 ? books[books.length - 1].bookId + 1 : 1100;
-
                 const bookData = {
-                    bookId: bookId,
-                    bookImage: bookImageUrl,
+                    bookId: generateBookId(), // Generate a unique book ID
+                    bookImage: event.target.result,
                     bookGenre: bookGenre,
                     bookName: bookName
                 };
 
+                const books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
                 books.push(bookData);
                 localStorage.setItem('donatedBooks', JSON.stringify(books));
                 addBookToTable(bookData);
                 document.getElementById('donateForm').reset(); // Clear form fields after donation
             };
+
+            // Read the selected file as data URL
             reader.readAsDataURL(bookImage);
+        }
+
+        // Function to generate a unique book ID
+        function generateBookId() {
+            const books = JSON.parse(localStorage.getItem('donatedBooks')) || [];
+            const lastBookId = books.length > 0 ? books[books.length - 1].bookId : 0;
+            return lastBookId + 1;
         }
 
         function addBookToTable(book) {
@@ -93,7 +99,11 @@
             const cell5 = newRow.insertCell(4);
 
             cell1.textContent = book.bookId;
-            cell2.innerHTML = `<img src="${book.bookImage}" alt="Book Image" width="100">`;
+            if (book.bookImage.startsWith('data:image')) {
+                cell2.innerHTML = `<img src="${book.bookImage}" alt="Book Image" width="100">`;
+            } else {
+                cell2.textContent = 'File Uploaded';
+            }
             cell3.textContent = book.bookGenre;
             cell4.textContent = book.bookName;
             cell5.innerHTML = `
